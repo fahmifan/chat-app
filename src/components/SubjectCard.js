@@ -6,7 +6,7 @@ const Card = styled.div`
   padding: 13px;
   box-sizing: border-box;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background: ${props => props.select ?'#fd8c2e' : '#fff'};
   border-top: 1px solid #eee;
