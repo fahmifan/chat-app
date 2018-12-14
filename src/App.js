@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
+import { Message  } from "./container"
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-      </div>
+      <>
+        <Message />
+      </>
     );
   }
 }
