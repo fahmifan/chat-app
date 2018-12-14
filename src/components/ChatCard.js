@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Container = styled.div`
   box-sizing: border-box;
   width: 429px;
-  background: #fff;
+  background: ${props => props.owner ? '#fff1e2': '#fff'};
   border-radius: 12px;
   margin-bottom: 22px;
 `
@@ -25,8 +25,8 @@ const Header = styled.div`
 `
 
 const Name = styled.div`
-  color: #fd8d2e;
-  font-size: 14px;
+  color: ${props => props.owner ? '#262626': '#fd8d2e'};
+  font-size: 12px;
   font-weight: bold;
 `
 
@@ -47,16 +47,14 @@ const Message = styled.p`
   padding-right: 14px;
 `
 
-export function ChatCard () {
-  return (
-    <Container>
-      <Header>
-        <Name>Stella Willson</Name>
-        <Time>00:39AM</Time>
-      </Header>
-      <Message>
-       Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the 
-      </Message>
-    </Container>
-  )
-} 
+export const ChatCard = ({owner}) => (
+  <Container owner={owner}>
+    <Header>
+      <Name owner={owner}>Stella Willson</Name>
+      <Time>00:39AM</Time>
+    </Header>
+    <Message>
+      Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the 
+    </Message>
+  </Container>
+)
