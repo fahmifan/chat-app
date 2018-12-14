@@ -1,7 +1,7 @@
 import React, { useState  } from "react"
 import styled from "styled-components"
 
-import { icSearch, icMessage, icSendEnable, bgChat } from '../icons'
+import { icSearch, icMessage, icSendEnable, bgChat, icNewSubject } from '../icons'
 
 import {
   InboxCard, ChatCard, SubjectCard  
@@ -104,6 +104,8 @@ const PanelTitle = styled.div`
   text-align: left;
   color: #262626;
   display: flex;
+  justify-content: space-between;
+  padding-right: 13px;
   padding-left: 13px;
   align-items: center;
   box-sizing: border-box;
@@ -183,7 +185,7 @@ export function Message() {
       </ChatPanel>
 
       <SubjectList>
-        <PanelTitle>Subject List</PanelTitle>
+        <PanelTitle><span>Subject List</span> <img src={icNewSubject} /></PanelTitle>
         
         <SubjectCard />
         <SubjectCard select />
