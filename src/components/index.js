@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export * from './InboxCard'
 export * from './ChatCard'
+export * from './SubjectCard'
 
 export const ProfilPict = styled.div`
   background: #ccc;

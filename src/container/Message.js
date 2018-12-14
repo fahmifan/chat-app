@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { icSearch, icMessage, icSendEnable, bgChat } from '../icons'
 
 import {
-  InboxCard, ChatCard  
+  InboxCard, ChatCard, SubjectCard  
 } from '../components'
 
 const Root = styled.div`
@@ -50,6 +50,7 @@ const Inbox = styled.div`
 const ChatPanel = styled.div`
   background: #eeeff1;
   box-sizing: border-box;
+  border-right: 1px solid #eee;
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -93,10 +94,10 @@ const ChatInput = styled.input`
 `
 
 const SubjectList = styled.div`
-  background: orange;
+  background: #fff;
 `
 
-const InboxHeader = styled.div`
+const PanelTitle = styled.div`
   height: 52px;
   background: #fff;
   font-size: 18px;
@@ -151,7 +152,7 @@ export function Message() {
       </LeftMenu>
 
       <Inbox>
-        <InboxHeader>Inbox</InboxHeader>
+        <PanelTitle>Inbox</PanelTitle>
 
         <SearchBox>
           <SearchIcon src={icSearch} />
@@ -165,7 +166,7 @@ export function Message() {
       </Inbox>
 
       <ChatPanel>
-        <InboxHeader>Life Advice Looking Thorugh Window</InboxHeader>
+        <PanelTitle>Life Advice Looking Thorugh Window</PanelTitle>
 
         <ChatList>
           <ChatCard owner />
@@ -181,7 +182,14 @@ export function Message() {
 
       </ChatPanel>
 
-      <SubjectList />
+      <SubjectList>
+        <PanelTitle>Subject List</PanelTitle>
+        
+        <SubjectCard />
+        <SubjectCard select />
+        <SubjectCard notif messageCount={2} />
+
+      </SubjectList>
 
     </Layout>
     </Root>
