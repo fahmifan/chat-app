@@ -1,7 +1,7 @@
 import React, { useState  } from "react"
 import styled from "styled-components"
 
-import { icSearch } from '../icons'
+import { icSearch, icMessage } from '../icons'
 
 import {
   InboxCard  
@@ -85,12 +85,18 @@ const Input = styled.input`
   height: 28px;
 `
 
+const LeftIcon = styled.img`
+  margin-top: 42px;
+  margin-bottom: 7px;
+`
+
 export function Message() {
   return (
     <Root>
     <Layout>
       <LeftMenu>
         <ProfilPict />
+        <LeftIcon src={icMessage} />
         <p style={{fontSize: '10px', color: '#fff'}}>Message</p>
       </LeftMenu>
       <Inbox>
