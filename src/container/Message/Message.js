@@ -323,6 +323,7 @@ export class Message extends React.Component {
             ))}
           </ChatList>
   
+          {/* inboxId -1 should be invalid, so it will hide the chat input */}
           {selected.inboxId !== -1 && <ChatInputBox>
             <ChatInput onChange={(e) => this.chatInputHandler(e)} value={chatInput} />
             <ChatSend src={icSendEnable} 
