@@ -63,7 +63,6 @@ const ChatList = styled.div`
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
 `
 
@@ -148,20 +147,6 @@ export class Message extends React.Component {
             time: '00:39AM',
             message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
           },
-          {
-            id: 91,
-            userId: 9,
-            name: 'Bondan',
-            time: '00:39AM',
-            message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
-          },
-          {
-            id: 92,
-            userId: 9,
-            name: 'Bondan',
-            time: '00:39AM',
-            message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
-          }
         ],
         subjectList: [
           { 

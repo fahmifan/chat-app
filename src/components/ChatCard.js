@@ -42,7 +42,7 @@ const Message = styled.p`
   line-height: 20px;
   text-align: left;
   color: #262626;
-  padding-bottom: 36px;
+  padding-bottom: 11px;
   padding-left: 14px;
   padding-right: 14px;
 `
