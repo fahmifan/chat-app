@@ -77,6 +77,7 @@ const ChatInputBox = styled.div`
   width: 100%;
   background: #fff;
   height: 58px;
+  border-top: 1px solid #eaeaea;
 `
 
 const ChatInput = styled.input`
@@ -138,7 +139,16 @@ export class Message extends React.Component {
             message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
         
           }
-        ]  
+        ],
+        subjectList: [
+          { 
+            id: 12,
+            topic: 'Popular Uses Of The Internet',
+            desc: 'The Myspace page defines the individual, his or her',
+            time: '05:16PM',
+            unreadMessageCount: 2,
+          },
+        ]
       },
       {
         id: 2,
@@ -160,7 +170,8 @@ export class Message extends React.Component {
             time: '01:01AM',
             message: 'Oke '        
           }
-        ]  
+        ],
+        subjectList: []
       },
       {
         id: 3,
@@ -175,27 +186,27 @@ export class Message extends React.Component {
             time: '05:18AM',
             message: 'Photographs are a way of.. preserving a moment in our lives for the rest of our lives.'
           }
-        ]  
+        ],
+        subjectList: []
       },
     ],
     chatsToShow: [],
-  }
-
-  fetchChats = (inboxId) => {
-    const inbox = this.state.inboxes.filter(inbox => inbox.id === inboxId)[0]
-    console.log("inbox", inbox)
-    this.setState({
-      chatsToShow: [...inbox.chats]
-    })
+    subjectListToShow: [],
   }
 
   inboxClickHandler = (inboxId) => {
     console.log("inboxId", inboxId);
-    this.fetchChats(inboxId);
+
+    const inbox = this.state.inboxes.filter(inbox => inbox.id === inboxId)[0]
+    console.log("inbox", inbox)
+    this.setState({
+      chatsToShow: [...inbox.chats],
+      subjectListToShow: [...inbox.subjectList],
+    })
   }
 
   render() {
-    const {chatsToShow, inboxes} = this.state
+    const {chatsToShow, inboxes, subjectListToShow} = this.state
     const myUserId = 9
     return (
       <Root>
@@ -234,9 +245,14 @@ export class Message extends React.Component {
         <SubjectList>
           <PanelTitle><span>Subject List</span> <img src={icNewSubject} /></PanelTitle>
           
-          <SubjectCard />
-          <SubjectCard select />
-          <SubjectCard notif messageCount={2} />
+          {subjectListToShow && subjectListToShow.map(subject => (
+            <SubjectCard
+              topic={subject.topic}
+              desc={subject.desc}
+              time={subject.time}
+              unreadMessageCount={subject.unreadMessageCount}
+            />
+          )) }
   
         </SubjectList>
   

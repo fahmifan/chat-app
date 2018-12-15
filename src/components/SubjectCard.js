@@ -41,31 +41,27 @@ const NotifMessage = styled.div`
   font-size: 10px;
   width: 19px;
   height: 19px;
-  margin-left: 30px;
   margin-right: 7px;
   border-radius: 100%;
 `
 
-const Right = styled.div`
-  height: 100%;
-  display: grid;
-  grid-auto-rows: 50% 50%;
-`
 const Desc = styled.p`
   color: ${props => props.select ? '#fff':'#9d9ea2' };
   font-size: 13px;
+  max-width: 180px;
+  text-overflow: ellipsis;
 `
 const Detail = styled.div`
 
 `
 
-export const SubjectCard = ({select, notif, messageCount, handleClick}) => (
+export const SubjectCard = ({select, unreadMessageCount, handleClick, topic, desc, time}) => (
   <Card select={select} onClick={handleClick}>
     <Detail>
-      <Topic select={select}>Life Advice Looking</Topic>
-      <Desc select={select}>Audio player software </Desc>
-      <Time select={select}>06:40AM</Time>
+      <Topic select={select}>{topic}</Topic>
+      <Desc select={select}>{desc}</Desc>
+      <Time select={select}>{time}</Time>
     </Detail>
-    {notif && <NotifMessage>{messageCount}</NotifMessage>}
+    {unreadMessageCount && <NotifMessage>{unreadMessageCount}</NotifMessage>}
   </Card>
 )
