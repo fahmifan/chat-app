@@ -120,9 +120,10 @@ export class Message extends React.Component {
     inboxes: [
       {
         id: 1,
+        name: 'Stella Willson',
         topic: 'Life Advice Looking Thorugh Window',
         time: "12:08PM",
-        lastMessage: "Sony laptops are among the most well",
+        lastMessage: "Sony laptops are ",
         chats: [
           {
             id: 89,
@@ -158,8 +159,9 @@ export class Message extends React.Component {
       },
       {
         id: 2,
+        name: 'Isaiah Sharp',
         topic: 'Linux Or Windows Which..',
-        lastMessage: "There are advances being.. made in science and...",
+        lastMessage: "There are advances being...",
         time: "01:01AM",
         chats: [
           {
@@ -181,6 +183,7 @@ export class Message extends React.Component {
       },
       {
         id: 3,
+        name: 'Cameron Webster',
         topic: 'What is hdpc',
         lastMessage: "Photographs are a way of.. ",
         time: "12:08PM",        
@@ -201,7 +204,8 @@ export class Message extends React.Component {
     selected: {
       inboxId: -1,
       subjectListId: -1,
-    }
+    },
+    inboxSearch: '',
   }
 
   inboxClickHandler = (inboxId) => {
@@ -220,8 +224,14 @@ export class Message extends React.Component {
     })
   }
 
+  searchInputHandler = (event) => {
+    const query = event.target.value
+    this.setState({inboxSearch: query})
+
+  }
+
   render() {
-    const { chatsToShow, inboxes, subjectListToShow, selected } = this.state
+    const { chatsToShow, inboxes, subjectListToShow, selected, inboxSearch } = this.state
     const myUserId = 9
     return (
       <Root>
@@ -233,7 +243,13 @@ export class Message extends React.Component {
           <p style={{fontSize: '10px', color: '#fff'}}>Message</p>
         </LeftMenu>
   
-        {inboxes && <Inbox selectedInboxId={selected.inboxId} inboxes={inboxes} inboxClickHandler={(inboxId) => this.inboxClickHandler(inboxId)} />}
+        {inboxes && <Inbox 
+          selectedInboxId={selected.inboxId} 
+          inboxes={inboxes} 
+          inboxClickHandler={(inboxId) => this.inboxClickHandler(inboxId)} 
+          searchInputHandler={(e) => this.searchInputHandler(e)}
+          searchValue={inboxSearch}
+        />}
   
         <ChatPanel>
           <PanelTitle>Life Advice Looking Thorugh Window</PanelTitle>

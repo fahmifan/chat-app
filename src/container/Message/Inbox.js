@@ -43,7 +43,7 @@ const SearchInput = styled.input`
 
 export class Inbox extends React.Component {
   render() {
-    const { inboxes, selectedInboxId } = this.props
+    const { inboxes, selectedInboxId, searchInputHandler, searchValue } = this.props
     return (
       <Container>
         
@@ -51,7 +51,7 @@ export class Inbox extends React.Component {
   
         <SearchBox>
             <SearchIcon src={icSearch} />
-            <SearchInput placeholder="Search Proofn" />
+            <SearchInput onChange={(e) => searchInputHandler(e)} value={searchValue}  placeholder="Search Proofn" />
           </SearchBox>
   
           {inboxes && inboxes.map(inbox => (
@@ -64,7 +64,11 @@ export class Inbox extends React.Component {
               // click will be handle in parent
               handleClick={() => this.props.inboxClickHandler(inbox.id)}
               messageCount={inbox.messageCount} />
-          ))}
+            ))
+            .filter(inbox => {
+              return searchValue ? inbox.props.name ? inbox.props.name.toLowerCase().includes(searchValue.toLowerCase()) : true : true
+            })
+          }
 
       </Container>
     )

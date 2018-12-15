@@ -7,6 +7,7 @@ const Card = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: start;
+  line-height: 20px;
   align-items: center;
   background: ${props => props.select ?'#eaeaea' : '#fff'};
 
