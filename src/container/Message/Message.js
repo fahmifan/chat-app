@@ -1,0 +1,201 @@
+import React, { useState  } from "react"
+import styled from "styled-components"
+
+import { icSearch, icMessage, icSendEnable, bgChat, icNewSubject } from '../../icons'
+
+import {
+  ChatCard, SubjectCard  
+} from '../../components'
+
+import { Inbox  } from './Inbox'
+
+const Root = styled.div`
+  @import url('https://fonts.googleapis.com/css?family=Rubik');
+  font-family: 'Rubik', sans-serif;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: #f9f9f9;
+`
+
+const Layout = styled.main`
+  display: grid;
+  grid-template-columns: 56px 286px 500px 240px;
+  box-sizing: border-box;
+  padding-bottom: 30px;
+  padding-top: 6px;
+`
+
+const ProfilPict = styled.div`
+  background: #ccc;
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+`
+
+const LeftMenu = styled.div`
+  /* background shoul be gradient: #ff711c --> #ff9b4b */
+  background: linear-gradient(to bottom, #ff9b4b 0%,#ff711c 100%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 14px;
+  border-right: 1px solid #eee;
+`
+
+const ChatPanel = styled.div`
+  background: #eeeff1;
+  box-sizing: border-box;
+  border-right: 1px solid #eee;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+`
+
+const ChatList = styled.div`
+  background: url(${bgChat});
+  box-sizing: border-box;
+  width: 100%;
+  height: 80vh;
+  overflow-y: scroll;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+`
+
+const ChatInputBox = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 100%;
+  background: #fff;
+  height: 58px;
+`
+
+const ChatInput = styled.input`
+  box-sizing: border-box;
+  width: 452px;
+  border: none;
+  height: 50px;
+
+  &:focus {
+    outline: none;
+  }
+`
+
+const SubjectList = styled.div`
+  background: #fff;
+`
+
+const PanelTitle = styled.div`
+  height: 52px;
+  background: #fff;
+  font-size: 18px;
+  text-align: left;
+  color: #262626;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 13px;
+  padding-left: 13px;
+  align-items: center;
+  box-sizing: border-box;
+`
+
+const LeftIcon = styled.img`
+  margin-top: 42px;
+  margin-bottom: 7px;
+`
+
+export class Message extends React.Component {
+  state = {
+    chats: []
+  }
+
+  fetchChats = (inboxId) => {
+    this.setState({
+      chats: [
+        {
+          id: 89,
+          userId: 2,
+          time: '00:39AM',
+          name: 'Stella Willson',
+          message: 'Do you want to download free song for ipod? If so, reading this article could save you from getting in to a lot of trouble! Downloading music to your Ipod has more than one pitfall associated with it, and this article will tell you the best ',
+        },
+        {
+          id: 90,
+          userId: 9,
+          name: 'Bondan',
+          time: '00:39AM',
+          message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
+
+        }
+      ]
+    })
+  }
+
+  inboxClickHandler = (inboxId) => {
+    console.log("inboxId", inboxId);
+    this.fetchChats(inboxId);
+  }
+
+  render() {
+    const myUserId = 9
+    return (
+      <Root>
+      <Layout>
+  
+        <LeftMenu>
+          <ProfilPict />
+          <LeftIcon src={icMessage} />
+          <p style={{fontSize: '10px', color: '#fff'}}>Message</p>
+        </LeftMenu>
+  
+        <Inbox inboxClickHandler={(inboxId) => this.inboxClickHandler(inboxId)} />
+  
+        <ChatPanel>
+          <PanelTitle>Life Advice Looking Thorugh Window</PanelTitle>
+  
+          <ChatList>
+            {this.state.chats && this.state.chats.map(chat => (
+              <ChatCard key={chat.id} 
+                name={chat.name}
+                owner={chat.userId === myUserId}
+                userId={chat.userId}
+                message={chat.message}
+                time={chat.time}
+              />
+            ))}
+            {/* <ChatCard owner />
+            <ChatCard />
+            <ChatCard />
+            <ChatCard /> */}
+          </ChatList>
+  
+          <ChatInputBox>
+           <ChatInput />
+           <img src={icSendEnable} type="button" />
+          </ChatInputBox>
+  
+        </ChatPanel>
+  
+        <SubjectList>
+          <PanelTitle><span>Subject List</span> <img src={icNewSubject} /></PanelTitle>
+          
+          <SubjectCard />
+          <SubjectCard select />
+          <SubjectCard notif messageCount={2} />
+  
+        </SubjectList>
+  
+      </Layout>
+      </Root>
+    )
+  }
+} 

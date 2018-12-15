@@ -41,7 +41,7 @@ const PersonDetail = styled.div`
   box-sizing: border-box;
 `
 
-const Quote = styled.p`
+const Topic = styled.p`
   color: #414141;
   font-size: 13px;
 `
@@ -58,7 +58,7 @@ const Time = styled.div`
   ${props => props.notif ? 'color: #fd8c2e; font-weight: bold' : ''};  
 `
 
-const Topic = styled.p`
+const Message = styled.p`
   font-size: 14px;
   color: #9d9ea2;
 `
@@ -83,18 +83,18 @@ const Right = styled.div`
   grid-auto-rows: 50% 50%;
 `
 
-export const InboxCard = ({select, notif, messageCount, handleClick}) => (
-  <Card select={select} onClick={handleClick}>
+export const InboxCard = ({select, name, time, notif, messageCount, topic, message, handleClick: clickHandler}) => (
+  <Card select={select} onClick={clickHandler}>
     <ProfilPict />
     <PersonDetail>
       <Name>
-        <span>Stella Wilson</span>
+        <span>{name}</span>
       </Name>
-      <Quote>Life Advice Looking Through..</Quote>
-      <Topic>Sony laptops are among the </Topic>
+      <Topic>{topic}</Topic>
+      <Message>{message}</Message>
     </PersonDetail>
     <Right>
-      <Time notif={notif}>12:08PM</Time>
+      <Time notif={notif}>{time}</Time>
       {notif && <NotifMessage>{messageCount}</NotifMessage>}
     </Right>
   </Card>
