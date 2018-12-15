@@ -91,6 +91,14 @@ const ChatInput = styled.input`
   }
 `
 
+const ChatSend = styled.img`
+  border: none;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+`
+
 const SubjectList = styled.div`
   background: #fff;
 `
@@ -117,6 +125,7 @@ const LeftIcon = styled.img`
 export class Message extends React.Component {
   state = {
     userId: 9,
+    username: 'Bondan',
     inboxes: [
       {
         id: 1,
@@ -138,7 +147,20 @@ export class Message extends React.Component {
             name: 'Bondan',
             time: '00:39AM',
             message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
-        
+          },
+          {
+            id: 91,
+            userId: 9,
+            name: 'Bondan',
+            time: '00:39AM',
+            message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
+          },
+          {
+            id: 92,
+            userId: 9,
+            name: 'Bondan',
+            time: '00:39AM',
+            message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
           }
         ],
         subjectList: [
@@ -206,11 +228,10 @@ export class Message extends React.Component {
       subjectListId: -1,
     },
     inboxSearch: '',
+    chatInput: '',
   }
 
   inboxClickHandler = (inboxId) => {
-    console.log("inboxId", inboxId);
-
     const inbox = this.state.inboxes.filter(inbox => inbox.id === inboxId)[0]
     console.log("inbox", inbox)
     this.setState({
@@ -225,14 +246,42 @@ export class Message extends React.Component {
   }
 
   searchInputHandler = (event) => {
-    const query = event.target.value
-    this.setState({inboxSearch: query})
+    this.setState({inboxSearch: event.target.value})
+  }
 
+  chatInputHandler = (event) => {
+    this.setState({chatInput: event.target.value})
+  }
+
+  chatSendHandler = () => {
+    const inboxId = this.state.selected.inboxId
+    const currInbox = this.state.inboxes.filter(inbox => inbox.id === inboxId)[0]
+    const currChats = [...currInbox.chats]
+    const newChat = {
+      id: currChats[currChats.length - 1].id + 1,
+      name: this.state.username,
+      userId: this.state.userId,
+      time: currChats[currChats.length - 1].time,
+      message: this.state.chatInput,
+    }
+
+    const updatedInboxes = [...this.state.inboxes].map(inbox => {
+      if(inbox.id === currInbox.id) {
+        inbox.chats = [...inbox.chats, newChat]
+      }
+
+      return inbox
+    })  
+
+    this.setState({
+      inboxes: updatedInboxes
+    })
+
+    this.inboxClickHandler(inboxId)
   }
 
   render() {
-    const { chatsToShow, inboxes, subjectListToShow, selected, inboxSearch } = this.state
-    const myUserId = 9
+    const { userId, chatsToShow, inboxes, subjectListToShow, selected, inboxSearch } = this.state
     return (
       <Root>
       <Layout>
@@ -258,7 +307,7 @@ export class Message extends React.Component {
             {chatsToShow && chatsToShow.map(chat => (
               <ChatCard key={chat.id} 
                 name={chat.name}
-                owner={chat.userId === myUserId}
+                owner={chat.userId === userId}
                 userId={chat.userId}
                 message={chat.message}
                 time={chat.time}
@@ -267,8 +316,9 @@ export class Message extends React.Component {
           </ChatList>
   
           <ChatInputBox>
-           <ChatInput />
-           <img src={icSendEnable} type="button" />
+           <ChatInput onChange={(e) => this.chatInputHandler(e)} />
+           <ChatSend src={icSendEnable} 
+            onClick={() => this.chatSendHandler()} />
           </ChatInputBox>
   
         </ChatPanel>
@@ -294,65 +344,3 @@ export class Message extends React.Component {
     )
   }
 } 
-
-const $globData = [
-  {
-    userId: 9,
-    inboxes: [
-      {
-        id: 1,
-        topic: 'Life Advice Looking Thorugh Window',
-        chats: [
-          {
-            id: 89,
-            userId: 2,
-            time: '00:39AM',
-            name: 'Stella Willson',
-            message: 'Do you want to download free song for ipod? If so, reading this article could save you from getting in to a lot of trouble! Downloading music to your Ipod has more than one pitfall associated with it, and this article will tell you the best ',
-          },
-          {
-            id: 90,
-            userId: 9,
-            name: 'Bondan',
-            time: '00:39AM',
-            message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
-        
-          }
-        ]  
-      },
-      {
-        id: 2,
-        topic: 'Linux Or Windows Which..',
-        chats: [
-          {
-            id: 91,
-            userId: 13,
-            time: '01:01AM',
-            name: 'Ervin Howell',
-            message: 'There are advances being.. made in science and technology everyday, and a good example of this is the LCD monitor. LCD monitors have several benefits over the old chunky computer monitors that most users are familiar with. Old computer monitors, take up quite a bit of desktop space, put out a ton of heat, drain a ton of energy, and most often have low picture quality and resolution ',
-          },
-          {
-            id: 92,
-            userId: 9,
-            name: 'Bondan',
-            time: '01:01AM',
-            message: 'Oke '        
-          }
-        ]  
-      },
-      {
-        id: 3,
-        topic: 'What is hdpc',
-        chats: [
-          {
-            id: 99,
-            userId: 77,
-            name: 'Cameron Webster',
-            time: '05:18AM',
-            message: 'Photographs are a way of.. preserving a moment in our lives for the rest of our lives.'
-          }
-        ]  
-      },
-    ]
-  }
-]
