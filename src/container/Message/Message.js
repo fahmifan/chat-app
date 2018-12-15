@@ -80,14 +80,19 @@ const ChatInputBox = styled.div`
   border-top: 1px solid #eaeaea;
 `
 
-const ChatInput = styled.input`
+const ChatInput = styled.textarea`
   box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
   width: 452px;
   border: none;
   height: 50px;
-
+  font-size: 15px;
+  padding-top: 16px;
   &:focus {
     outline: none;
+  }
+  ::placeholder {
+    color: #b8b8b8;
   }
 `
 
@@ -325,7 +330,8 @@ export class Message extends React.Component {
   
           {/* inboxId -1 should be invalid, so it will hide the chat input */}
           {selected.inboxId !== -1 && <ChatInputBox>
-            <ChatInput onChange={(e) => this.chatInputHandler(e)} value={chatInput} />
+            <ChatInput placeholder="Write message..."
+              onChange={(e) => this.chatInputHandler(e)} value={chatInput} />
             <ChatSend src={icSendEnable} 
               onClick={() => this.chatSendHandler()} />
           </ChatInputBox> }  

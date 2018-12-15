@@ -38,7 +38,7 @@ const PersonDetail = styled.div`
   height: 100%;
   flex-direction: column;
   justify-content: center;
-  width: 160px;
+  width: 150px;
   box-sizing: border-box;
 `
 
