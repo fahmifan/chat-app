@@ -1,4 +1,5 @@
 import React, { useState  } from "react"
+import ReactDOM from 'react-dom'
 import styled from "styled-components"
 
 import { icSearch, icMessage, icSendEnable, bgChat, icNewSubject } from '../../icons'
@@ -216,6 +217,10 @@ export class Message extends React.Component {
     chatInput: '',
   }
 
+  componentDidMount() {
+    this.scrollToBottom()
+  }
+
   inboxClickHandler = (inboxId) => {
     const inbox = this.state.inboxes.filter(inbox => inbox.id === inboxId)[0]
     console.log("inbox", inbox)
@@ -259,14 +264,32 @@ export class Message extends React.Component {
     })  
 
     this.setState({
-      inboxes: updatedInboxes
+      inboxes: updatedInboxes,
+      chatInput: '',
     })
 
     this.inboxClickHandler(inboxId)
   }
 
+  scrollToBottom = () => {
+    const { chatList } = this.refs
+    const scrollHeight = chatList.scrollHeight
+    const height = chatList.clientHeight
+    const maxScrollTop = scrollHeight - height
+    ReactDOM.findDOMNode(chatList).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0 
+  }
+
   render() {
-    const { userId, chatsToShow, inboxes, subjectListToShow, selected, inboxSearch } = this.state
+    const { 
+      userId, 
+      chatsToShow, 
+      inboxes, 
+      subjectListToShow, 
+      selected, 
+      inboxSearch,
+      chatInput, 
+    } = this.state
+
     return (
       <Root>
       <Layout>
@@ -288,7 +311,7 @@ export class Message extends React.Component {
         <ChatPanel>
           <PanelTitle>Life Advice Looking Thorugh Window</PanelTitle>
   
-          <ChatList>
+          <ChatList ref="chatList">
             {chatsToShow && chatsToShow.map(chat => (
               <ChatCard key={chat.id} 
                 name={chat.name}
@@ -300,12 +323,11 @@ export class Message extends React.Component {
             ))}
           </ChatList>
   
-          <ChatInputBox>
-           <ChatInput onChange={(e) => this.chatInputHandler(e)} />
-           <ChatSend src={icSendEnable} 
-            onClick={() => this.chatSendHandler()} />
-          </ChatInputBox>
-  
+          {selected.inboxId !== -1 && <ChatInputBox>
+            <ChatInput onChange={(e) => this.chatInputHandler(e)} value={chatInput} />
+            <ChatSend src={icSendEnable} 
+              onClick={() => this.chatSendHandler()} />
+          </ChatInputBox> }  
         </ChatPanel>
   
         <SubjectList>

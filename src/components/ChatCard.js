@@ -42,6 +42,7 @@ const Message = styled.p`
   line-height: 20px;
   text-align: left;
   color: #262626;
+  overflow-wrap: break-word;
   padding-bottom: 11px;
   padding-left: 14px;
   padding-right: 14px;
