@@ -83,7 +83,7 @@ const Right = styled.div`
   grid-auto-rows: 50% 50%;
 `
 
-export const InboxCard = ({select, name, time, notif, messageCount, topic, message, handleClick: clickHandler}) => (
+export const InboxCard = ({select, name, time, notif, messageCount, topic, lastMessage, handleClick: clickHandler}) => (
   <Card select={select} onClick={clickHandler}>
     <ProfilPict />
     <PersonDetail>
@@ -91,7 +91,7 @@ export const InboxCard = ({select, name, time, notif, messageCount, topic, messa
         <span>{name}</span>
       </Name>
       <Topic>{topic}</Topic>
-      <Message>{message}</Message>
+      <Message>{lastMessage}</Message>
     </PersonDetail>
     <Right>
       <Time notif={notif}>{time}</Time>

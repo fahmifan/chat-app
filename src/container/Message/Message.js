@@ -115,28 +115,77 @@ const LeftIcon = styled.img`
 
 export class Message extends React.Component {
   state = {
-    chats: []
+    userId: 9,
+    inboxes: [
+      {
+        id: 1,
+        topic: 'Life Advice Looking Thorugh Window',
+        time: "12:08PM",
+        lastMessage: "Sony laptops are among the most well",
+        chats: [
+          {
+            id: 89,
+            userId: 2,
+            time: '00:39AM',
+            name: 'Stella Willson',
+            message: 'Do you want to download free song for ipod? If so, reading this article could save you from getting in to a lot of trouble! Downloading music to your Ipod has more than one pitfall associated with it, and this article will tell you the best ',
+          },
+          {
+            id: 90,
+            userId: 9,
+            name: 'Bondan',
+            time: '00:39AM',
+            message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
+        
+          }
+        ]  
+      },
+      {
+        id: 2,
+        topic: 'Linux Or Windows Which..',
+        lastMessage: "There are advances being.. made in science and...",
+        time: "01:01AM",
+        chats: [
+          {
+            id: 91,
+            userId: 13,
+            time: '01:01AM',
+            name: 'Ervin Howell',
+            message: 'There are advances being.. made in science and technology everyday, and a good example of this is the LCD monitor. LCD monitors have several benefits over the old chunky computer monitors that most users are familiar with. Old computer monitors, take up quite a bit of desktop space, put out a ton of heat, drain a ton of energy, and most often have low picture quality and resolution ',
+          },
+          {
+            id: 92,
+            userId: 9,
+            name: 'Bondan',
+            time: '01:01AM',
+            message: 'Oke '        
+          }
+        ]  
+      },
+      {
+        id: 3,
+        topic: 'What is hdpc',
+        lastMessage: "Photographs are a way of.. ",
+        time: "12:08PM",        
+        chats: [
+          {
+            id: 99,
+            userId: 77,
+            name: 'Cameron Webster',
+            time: '05:18AM',
+            message: 'Photographs are a way of.. preserving a moment in our lives for the rest of our lives.'
+          }
+        ]  
+      },
+    ],
+    chatsToShow: [],
   }
 
   fetchChats = (inboxId) => {
+    const inbox = this.state.inboxes.filter(inbox => inbox.id === inboxId)[0]
+    console.log("inbox", inbox)
     this.setState({
-      chats: [
-        {
-          id: 89,
-          userId: 2,
-          time: '00:39AM',
-          name: 'Stella Willson',
-          message: 'Do you want to download free song for ipod? If so, reading this article could save you from getting in to a lot of trouble! Downloading music to your Ipod has more than one pitfall associated with it, and this article will tell you the best ',
-        },
-        {
-          id: 90,
-          userId: 9,
-          name: 'Bondan',
-          time: '00:39AM',
-          message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
-
-        }
-      ]
+      chatsToShow: [...inbox.chats]
     })
   }
 
@@ -146,6 +195,7 @@ export class Message extends React.Component {
   }
 
   render() {
+    const {chatsToShow, inboxes} = this.state
     const myUserId = 9
     return (
       <Root>
@@ -157,13 +207,13 @@ export class Message extends React.Component {
           <p style={{fontSize: '10px', color: '#fff'}}>Message</p>
         </LeftMenu>
   
-        <Inbox inboxClickHandler={(inboxId) => this.inboxClickHandler(inboxId)} />
+        {inboxes && <Inbox inboxes={inboxes} inboxClickHandler={(inboxId) => this.inboxClickHandler(inboxId)} />}
   
         <ChatPanel>
           <PanelTitle>Life Advice Looking Thorugh Window</PanelTitle>
   
           <ChatList>
-            {this.state.chats && this.state.chats.map(chat => (
+            {chatsToShow && chatsToShow.map(chat => (
               <ChatCard key={chat.id} 
                 name={chat.name}
                 owner={chat.userId === myUserId}
@@ -172,10 +222,6 @@ export class Message extends React.Component {
                 time={chat.time}
               />
             ))}
-            {/* <ChatCard owner />
-            <ChatCard />
-            <ChatCard />
-            <ChatCard /> */}
           </ChatList>
   
           <ChatInputBox>
@@ -199,3 +245,65 @@ export class Message extends React.Component {
     )
   }
 } 
+
+const $globData = [
+  {
+    userId: 9,
+    inboxes: [
+      {
+        id: 1,
+        topic: 'Life Advice Looking Thorugh Window',
+        chats: [
+          {
+            id: 89,
+            userId: 2,
+            time: '00:39AM',
+            name: 'Stella Willson',
+            message: 'Do you want to download free song for ipod? If so, reading this article could save you from getting in to a lot of trouble! Downloading music to your Ipod has more than one pitfall associated with it, and this article will tell you the best ',
+          },
+          {
+            id: 90,
+            userId: 9,
+            name: 'Bondan',
+            time: '00:39AM',
+            message: 'Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat, Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of LINUX. '
+        
+          }
+        ]  
+      },
+      {
+        id: 2,
+        topic: 'Linux Or Windows Which..',
+        chats: [
+          {
+            id: 91,
+            userId: 13,
+            time: '01:01AM',
+            name: 'Ervin Howell',
+            message: 'There are advances being.. made in science and technology everyday, and a good example of this is the LCD monitor. LCD monitors have several benefits over the old chunky computer monitors that most users are familiar with. Old computer monitors, take up quite a bit of desktop space, put out a ton of heat, drain a ton of energy, and most often have low picture quality and resolution ',
+          },
+          {
+            id: 92,
+            userId: 9,
+            name: 'Bondan',
+            time: '01:01AM',
+            message: 'Oke '        
+          }
+        ]  
+      },
+      {
+        id: 3,
+        topic: 'What is hdpc',
+        chats: [
+          {
+            id: 99,
+            userId: 77,
+            name: 'Cameron Webster',
+            time: '05:18AM',
+            message: 'Photographs are a way of.. preserving a moment in our lives for the rest of our lives.'
+          }
+        ]  
+      },
+    ]
+  }
+]

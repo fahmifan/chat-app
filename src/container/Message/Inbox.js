@@ -42,48 +42,8 @@ const SearchInput = styled.input`
 `
 
 export class Inbox extends React.Component {
-  state = {
-    inboxes: []
-  }
-
-  componentDidMount() {
-    this.fetchInboxes()
-  }
-
-  fetchInboxes = () => {
-    this.setState({
-      inboxes: [
-        {
-          "id": 4,
-          "name": "Stella Willson",
-          "email": "Shanna@melissa.tv",
-          "time": "12:08PM",
-          "topic": "Life Advice Looking Thorugh Window",
-          "message": "Sony laptops are among the most well"
-        },
-        {
-          "id": 5,
-          "name": "Ervin Howell",
-          "email": "Shanna@melissa.tv",
-          "time": "01:01AM",
-          "topic": "Linux Or Windows Which..",
-          "message": "There are advances being.. made in science and...",
-        },
-        {
-          "id": 9,
-          "name": "Clementine Bauch",
-          "username": "Samantha",
-          "email": "Nathan@yesenia.net",
-          "time": "12:08PM",
-          "topic": "What is hdpc",
-          "message": "Photographs are a way of.. ",
-        },        
-      ]
-    })
-  }
-
   render() {
-    const { inboxes } = this.state
+    const { inboxes } = this.props
     return (
       <Container>
         
@@ -99,7 +59,7 @@ export class Inbox extends React.Component {
               name={inbox.name}
               topic={inbox.topic}
               time={inbox.time}
-              message={inbox.message}
+              lastMessage={inbox.lastMessage}
               // click will be handle in parent
               handleClick={() => this.props.inboxClickHandler(inbox.id)}
               messageCount={inbox.messageCount} />
