@@ -29,7 +29,9 @@ const Layout = styled.main`
 `
 
 const ProfilPict = styled.div`
-  background: #ccc;
+  background: ${props => props.imgUrl ? `url(${props.imgUrl})` : '#ccc'};
+  background-size: cover;
+  background-position: center;
   width: 36px;
   height: 36px;
   border-radius: 100%;
@@ -130,11 +132,13 @@ const LeftIcon = styled.img`
 export class Message extends React.Component {
   state = {
     userId: 9,
+    imgUrl: 'https://loremflickr.com/cache/resized/4828_44426255220_98bf676844_320_240_nofilter.jpg',
     username: 'Bondan',
     inboxes: [
       {
         id: 1,
         name: 'Stella Willson',
+        imgUrl: 'https://loremflickr.com/cache/resized/4882_45134269935_82fc1799e9_320_240_nofilter.jpg',
         topic: 'Life Advice Looking Thorugh Window',
         time: "12:08PM",
         lastMessage: "Sony laptops are ",
@@ -173,6 +177,7 @@ export class Message extends React.Component {
       {
         id: 2,
         name: 'Isaiah Sharp',
+        imgUrl: 'https://loremflickr.com/cache/resized/4806_46034232831_217137d386_320_240_nofilter.jpg',
         topic: 'Linux Or Windows Which..',
         lastMessage: "There are advances being...",
         time: "01:01AM",
@@ -197,6 +202,7 @@ export class Message extends React.Component {
       {
         id: 3,
         name: 'Cameron Webster',
+        imgUrl: 'https://loremflickr.com/cache/resized/4892_45120447565_bcae0ea975_n_320_240_nofilter.jpg',
         topic: 'What is hdpc',
         lastMessage: "Photographs are a way of.. ",
         time: "12:08PM",        
@@ -293,6 +299,7 @@ export class Message extends React.Component {
       selected, 
       inboxSearch,
       chatInput, 
+      imgUrl,
     } = this.state
 
     return (
@@ -300,7 +307,7 @@ export class Message extends React.Component {
       <Layout>
   
         <LeftMenu>
-          <ProfilPict />
+          <ProfilPict imgUrl={imgUrl}  />
           <LeftIcon src={icMessage} />
           <p style={{fontSize: '10px', color: '#fff'}}>Message</p>
         </LeftMenu>

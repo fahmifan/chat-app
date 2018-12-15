@@ -58,6 +58,7 @@ export class Inbox extends React.Component {
             <InboxCard key={inbox.id} 
               name={inbox.name}
               topic={inbox.topic}
+              imgUrl={inbox.imgUrl}
               time={inbox.time}
               select={selectedInboxId === inbox.id}
               lastMessage={inbox.lastMessage}

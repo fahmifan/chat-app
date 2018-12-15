@@ -9,14 +9,16 @@ const Card = styled.div`
   justify-content: start;
   line-height: 20px;
   align-items: center;
-  background: ${props => props.select ?'#eaeaea' : '#fff'};
+  background: ${props => props.select ? '#eaeaea' : '#fff'};
 
   &:hover {
     cursor: pointer;
   }
 `
 const ProfilPict = styled.div`
-  background: #ccc;
+  background: ${props => props.imgUrl ? `url(${props.imgUrl})` : '#ccc'};
+  background-size: cover;
+  background-position: center;
   width: 50px;
   height: 50px;
   margin-left: 13px;
@@ -84,9 +86,9 @@ const Right = styled.div`
   grid-auto-rows: 50% 50%;
 `
 
-export const InboxCard = ({select, name, time, notif, messageCount, topic, lastMessage, handleClick: clickHandler}) => (
-  <Card select={select} onClick={clickHandler}>
-    <ProfilPict />
+export const InboxCard = ({select, name, imgUrl, time, notif, messageCount, topic, lastMessage, handleClick}) => (
+  <Card select={select} onClick={handleClick}>
+    <ProfilPict imgUrl={imgUrl}  />
     <PersonDetail>
       <Name>
         <span>{name}</span>
