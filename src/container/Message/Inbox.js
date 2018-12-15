@@ -43,7 +43,7 @@ const SearchInput = styled.input`
 
 export class Inbox extends React.Component {
   render() {
-    const { inboxes } = this.props
+    const { inboxes, selectedInboxId } = this.props
     return (
       <Container>
         
@@ -59,6 +59,7 @@ export class Inbox extends React.Component {
               name={inbox.name}
               topic={inbox.topic}
               time={inbox.time}
+              select={selectedInboxId === inbox.id}
               lastMessage={inbox.lastMessage}
               // click will be handle in parent
               handleClick={() => this.props.inboxClickHandler(inbox.id)}

@@ -144,10 +144,16 @@ export class Message extends React.Component {
           { 
             id: 12,
             topic: 'Popular Uses Of The Internet',
-            desc: 'The Myspace page defines the individual, his or her',
+            desc: 'The Myspace page defines',
             time: '05:16PM',
             unreadMessageCount: 2,
           },
+          {
+            id: 1,
+            topic: 'Life Advice Looking Through..',
+            desc: 'Audio player software',
+            time: '06:40PM',
+          }
         ]
       },
       {
@@ -192,6 +198,10 @@ export class Message extends React.Component {
     ],
     chatsToShow: [],
     subjectListToShow: [],
+    selected: {
+      inboxId: -1,
+      subjectListId: -1,
+    }
   }
 
   inboxClickHandler = (inboxId) => {
@@ -200,13 +210,18 @@ export class Message extends React.Component {
     const inbox = this.state.inboxes.filter(inbox => inbox.id === inboxId)[0]
     console.log("inbox", inbox)
     this.setState({
+      selected: {
+        ...this.state.selected,
+        inboxId: inboxId,
+        subjectListId: inboxId,
+      },
       chatsToShow: [...inbox.chats],
       subjectListToShow: [...inbox.subjectList],
     })
   }
 
   render() {
-    const {chatsToShow, inboxes, subjectListToShow} = this.state
+    const { chatsToShow, inboxes, subjectListToShow, selected } = this.state
     const myUserId = 9
     return (
       <Root>
@@ -218,7 +233,7 @@ export class Message extends React.Component {
           <p style={{fontSize: '10px', color: '#fff'}}>Message</p>
         </LeftMenu>
   
-        {inboxes && <Inbox inboxes={inboxes} inboxClickHandler={(inboxId) => this.inboxClickHandler(inboxId)} />}
+        {inboxes && <Inbox selectedInboxId={selected.inboxId} inboxes={inboxes} inboxClickHandler={(inboxId) => this.inboxClickHandler(inboxId)} />}
   
         <ChatPanel>
           <PanelTitle>Life Advice Looking Thorugh Window</PanelTitle>
@@ -247,6 +262,8 @@ export class Message extends React.Component {
           
           {subjectListToShow && subjectListToShow.map(subject => (
             <SubjectCard
+              key={subject.id}
+              select={selected.subjectListId === subject.id}
               topic={subject.topic}
               desc={subject.desc}
               time={subject.time}
