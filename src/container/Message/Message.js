@@ -345,7 +345,7 @@ export class Message extends React.Component {
         </ChatPanel>
   
         <SubjectList>
-          <PanelTitle><span>Subject List</span> <img src={icNewSubject} /></PanelTitle>
+          <PanelTitle><span>Subject List</span> <img src={icNewSubject} alt="new subject" /></PanelTitle>
           
           {subjectListToShow && subjectListToShow.map(subject => (
             <SubjectCard
