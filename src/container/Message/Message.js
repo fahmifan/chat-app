@@ -1,8 +1,8 @@
-import React, { useState  } from "react"
+import React from "react"
 import ReactDOM from 'react-dom'
 import styled from "styled-components"
 
-import { icSearch, icMessage, icSendEnable, bgChat, icNewSubject } from '../../icons'
+import { icMessage, icSendEnable, bgChat, icNewSubject } from '../../icons'
 
 import {
   ChatCard, SubjectCard  
@@ -132,7 +132,7 @@ const LeftIcon = styled.img`
 export class Message extends React.Component {
   state = {
     userId: 9,
-    imgUrl: 'https://loremflickr.com/cache/resized/4828_44426255220_98bf676844_320_240_nofilter.jpg',
+    imgUrl: 'https://loremflickr.com/cache/resized/4827_46223663272_a329115870_n_320_240_nofilter.jpg',
     username: 'Bondan',
     inboxes: [
       {
