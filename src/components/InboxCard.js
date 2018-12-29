@@ -1,8 +1,6 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components';
 
-import { theme } from "../theme";
-
 const Card = styled.div`
   width: 286px;
   height: 98px;
@@ -16,6 +14,7 @@ const Card = styled.div`
 
   &:hover {
     cursor: pointer;
+    opacity: 0.8;
   }
 `
 const ProfilPict = styled.div`
@@ -27,7 +26,7 @@ const ProfilPict = styled.div`
   margin-left: 13px;
   margin-right: 9px;
   border-radius: 100%;
-  border: 1px solid ${props => props.theme.color.primaryBackground};
+  border: 1px solid ${props => props.theme.color.secondaryBackground};
   box-sizing: border-box;
 `
 
@@ -91,20 +90,18 @@ const Right = styled.div`
 `
 
 export const InboxCard = ({select, name, imgUrl, time, notif, messageCount, topic, lastMessage, handleClick}) => (
-  <ThemeProvider theme={theme}>
-    <Card select={select} onClick={handleClick}>
-      <ProfilPict imgUrl={imgUrl}  />
-      <PersonDetail>
-        <Name>
-          <span>{name}</span>
-        </Name>
-        <Topic>{topic}</Topic>
-        <Message>{lastMessage}</Message>
-      </PersonDetail>
-      <Right>
-        <Time notif={notif}>{time}</Time>
-        {notif && <NotifMessage>{messageCount}</NotifMessage>}
-      </Right>
-    </Card>
-  </ThemeProvider>
+  <Card select={select} onClick={handleClick}>
+    <ProfilPict imgUrl={imgUrl}  />
+    <PersonDetail>
+      <Name>
+        <span>{name}</span>
+      </Name>
+      <Topic>{topic}</Topic>
+      <Message>{lastMessage}</Message>
+    </PersonDetail>
+    <Right>
+      <Time notif={notif}>{time}</Time>
+      {notif && <NotifMessage>{messageCount}</NotifMessage>}
+    </Right>
+  </Card>
 )

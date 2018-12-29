@@ -51,16 +51,14 @@ const Message = styled.p`
 `
 
 export const ChatCard = ({owner, message, time, name}) => (
-  <ThemeProvider theme={theme}>
-    <Container owner={owner}>
-      <Header>
-        { owner ? <Name owner={owner}>You ({name})</Name>
-          : <Name>{name}</Name> }
-        <Time>{time}</Time>
-      </Header>
-      <Message>
-        {message}
-      </Message>
-    </Container>
-  </ThemeProvider>
+  <Container owner={owner}>
+    <Header>
+      { owner ? <Name owner={owner}>You ({name})</Name>
+        : <Name>{name}</Name> }
+      <Time>{time}</Time>
+    </Header>
+    <Message>
+      {message}
+    </Message>
+  </Container>
 )

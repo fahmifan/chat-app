@@ -8,7 +8,7 @@ const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: ${props => props.select ?'#fd8c2e' : '#fff'};
+  background: ${props => props.select ? props.theme.color.primary : '#fff'};
   border-top: 1px solid #eee;
   line-height: 20px;
 
@@ -26,14 +26,14 @@ const Time = styled.p`
 
 const Topic = styled.p`
   font-size: 14px;
-font-weight: ${props => props.select ? 'reguler' : 'bold'};
+  font-weight: ${props => props.select ? 'reguler' : 'bold'};
   color: ${props => props.select ? '#fff' : '#262626'};  
   text-align: left;
   text-overflow: ellipsis;
 `
 
 const NotifMessage = styled.div`
-  background: #fd9b2e;
+  background: ${props => props.theme.color.primary};
   color: #fff;
   display: flex;
   justify-content: center;

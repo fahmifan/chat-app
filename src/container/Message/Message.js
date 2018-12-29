@@ -2,7 +2,16 @@ import React from "react"
 import ReactDOM from 'react-dom'
 import styled from "styled-components"
 
-import { icMessage, icSendEnable, bgChat, icNewSubject } from '../../icons'
+import { 
+  icMessage, 
+  icSendEnable, 
+  bgChat, 
+  icNewSubject,
+  icSendSVG,
+  icChatSVG,
+  icMailSVG,
+  icMailWhitePNG,
+} from '../../icons'
 
 import {
   ChatCard, SubjectCard  
@@ -39,7 +48,7 @@ const ProfilPict = styled.div`
 
 const LeftMenu = styled.div`
   /* background shoul be gradient: #ff711c --> #ff9b4b */
-  background: linear-gradient(to bottom, #ff9b4b 0%,#ff711c 100%);
+  background: linear-gradient(to bottom, ${props => props.theme.color.primary} 0%, ${props => props.theme.color.primaryDark} 100%);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -48,7 +57,7 @@ const LeftMenu = styled.div`
 `
 
 const ChatPanel = styled.div`
-  background: #eeeff1;
+  background: ${props => props.theme.color.secondaryBackground};
   box-sizing: border-box;
   border-right: 1px solid #eee;
   display: flex;
@@ -58,7 +67,7 @@ const ChatPanel = styled.div`
 `
 
 const ChatList = styled.div`
-  background: url(${bgChat});
+  background: ${props => props.theme.color.secondaryBackground};
   box-sizing: border-box;
   width: 100%;
   height: 80vh;
@@ -115,7 +124,7 @@ const PanelTitle = styled.div`
   background: #fff;
   font-size: 18px;
   text-align: left;
-  color: #262626;
+  color: ${props => props.theme.color.primaryText};
   display: flex;
   justify-content: space-between;
   padding-right: 13px;
@@ -127,6 +136,15 @@ const PanelTitle = styled.div`
 const LeftIcon = styled.img`
   margin-top: 42px;
   margin-bottom: 7px;
+  &:hover {
+    cursor: pointer;
+    opacity: 80%;
+  }
+`
+
+const InboxContainer = styled.div`
+  background: ${props => props.theme.color.textIcon};
+  height: 100%;
 `
 
 export class Message extends React.Component {
@@ -234,7 +252,6 @@ export class Message extends React.Component {
 
   inboxClickHandler = (inboxId) => {
     const inbox = this.state.inboxes.filter(inbox => inbox.id === inboxId)[0]
-    console.log("inbox", inbox)
     this.setState({
       selected: {
         ...this.state.selected,
@@ -308,10 +325,11 @@ export class Message extends React.Component {
   
         <LeftMenu>
           <ProfilPict imgUrl={imgUrl}  />
-          <LeftIcon src={icMessage} />
+          <LeftIcon src={icMailWhitePNG} />
           <p style={{fontSize: '10px', color: '#fff'}}>Message</p>
         </LeftMenu>
   
+        <InboxContainer>
         {inboxes && <Inbox 
           selectedInboxId={selected.inboxId} 
           inboxes={inboxes} 
@@ -319,9 +337,10 @@ export class Message extends React.Component {
           searchInputHandler={(e) => this.searchInputHandler(e)}
           searchValue={inboxSearch}
         />}
-  
+        </InboxContainer>
+
         <ChatPanel>
-          <PanelTitle>Life Advice Looking Thorugh Window</PanelTitle>
+          <PanelTitle>{inboxes[selected.inboxId === -1 ? 0 : selected.inboxId-1].topic}</PanelTitle>
   
           <ChatList ref="chatList">
             {chatsToShow && chatsToShow.map(chat => (
@@ -339,13 +358,13 @@ export class Message extends React.Component {
           {selected.inboxId !== -1 && <ChatInputBox>
             <ChatInput placeholder="Write message..."
               onChange={(e) => this.chatInputHandler(e)} value={chatInput} />
-            <ChatSend src={icSendEnable} 
+            <ChatSend src={icSendSVG} 
               onClick={() => this.chatSendHandler()} />
           </ChatInputBox> }  
         </ChatPanel>
   
         <SubjectList>
-          <PanelTitle><span>Subject List</span> <img src={icNewSubject} alt="new subject" /></PanelTitle>
+          <PanelTitle><span>Subject List</span> <img src={icChatSVG} alt="new subject" /></PanelTitle>
           
           {subjectListToShow && subjectListToShow.map(subject => (
             <SubjectCard

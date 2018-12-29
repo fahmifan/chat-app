@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { icSearch } from '../../icons'
-
 import { PanelTitle  } from '../../components'
 
 import {
@@ -11,7 +10,7 @@ import {
 
 
 const Container = styled.div`
-  background: #f9f9f9;
+  background: ${props => props.theme.color.primaryBackground};
   border-right: 1px solid #eee;
 `
 
@@ -64,7 +63,8 @@ export class Inbox extends React.Component {
               lastMessage={inbox.lastMessage}
               // click will be handle in parent
               handleClick={() => this.props.inboxClickHandler(inbox.id)}
-              messageCount={inbox.messageCount} />
+              messageCount={inbox.messageCount} 
+              notif={inbox.notif} />
             ))
             .filter(inbox => {
               return searchValue ? inbox.props.name ? inbox.props.name.toLowerCase().includes(searchValue.toLowerCase()) : true : true
