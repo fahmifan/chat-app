@@ -1,9 +1,8 @@
-# Proofn Chat Implementation
-## WIP: 
-- [ ] Display People (you can see list of people on the left side)
+# Simple Chat Implementation
 
-## TODO:
-- [ ] Write a message on a conversation (on the middle part of the layout)
-- [ ] Display the topic list of selected People (on the right side)
-- [ ] Jump between Topic or People.
-- [ ] Simple Search for People ( Simple means no complicated search )
+- [x] Display People (you can see list of people on the left side)
+- [x] Write a chat on a selected people
+- [x] Display the topic list of selected People
+- [x] Slect People to chat.
+- [x] Search People
+
