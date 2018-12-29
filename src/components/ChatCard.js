@@ -1,10 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
+
+import { theme } from "../theme";
 
 const Container = styled.div`
   box-sizing: border-box;
   width: 429px;
-  background: ${props => props.owner ? '#fff1e2': '#fff'};
+  background: ${props => props.owner ? props.theme.color.primaryLight: props.theme.color.textIcon};
   border-radius: 12px;
   margin-bottom: 22px;
 `
@@ -14,7 +16,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid ${props => props.theme.color.divider};
   padding-left: 11px;
   padding-right: 11px;
   padding-top: 11px;
@@ -25,13 +27,13 @@ const Header = styled.div`
 `
 
 const Name = styled.div`
-  color: ${props => props.owner ? '#262626': '#fd8d2e'};
+  color: ${props => props.owner ? props.theme.color.primaryText: props.theme.color.primary};
   font-size: 12px;
   font-weight: bold;
 `
 
 const Time = styled.div`
-  color: #5a5a5a;
+  color: ${props => props.theme.color.secondaryText};
   font-size: 11px;
   font-weight: bold;
 `
@@ -41,7 +43,7 @@ const Message = styled.p`
   font-size: 13px;
   line-height: 20px;
   text-align: left;
-  color: #262626;
+  color: ${props => props.theme.color.primaryText};
   overflow-wrap: break-word;
   padding-bottom: 11px;
   padding-left: 14px;
@@ -49,14 +51,16 @@ const Message = styled.p`
 `
 
 export const ChatCard = ({owner, message, time, name}) => (
-  <Container owner={owner}>
-    <Header>
-      { owner ? <Name owner={owner}>You ({name})</Name>
-        : <Name>{name}</Name> }
-      <Time>{time}</Time>
-    </Header>
-    <Message>
-      {message}
-    </Message>
-  </Container>
+  <ThemeProvider theme={theme}>
+    <Container owner={owner}>
+      <Header>
+        { owner ? <Name owner={owner}>You ({name})</Name>
+          : <Name>{name}</Name> }
+        <Time>{time}</Time>
+      </Header>
+      <Message>
+        {message}
+      </Message>
+    </Container>
+  </ThemeProvider>
 )
