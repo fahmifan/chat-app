@@ -5,6 +5,7 @@ export const theme = {
     primaryLight: '#E1BEE7',
     primaryText: '#212121',
     secondaryText: '#757575',
+    primaryBackground: '#EAEAEA', 
     divider: '#BDBDBD',
     textIcon: '#FFFFFF',
     accent: '#E040FB',
