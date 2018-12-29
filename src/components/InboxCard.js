@@ -1,5 +1,7 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+
+import { theme } from "../theme";
 
 const Card = styled.div`
   width: 286px;
@@ -9,7 +11,8 @@ const Card = styled.div`
   justify-content: start;
   line-height: 20px;
   align-items: center;
-  background: ${props => props.select ? '#eaeaea' : '#fff'};
+  background: ${props => props.select ? props.theme.color.primaryBackground 
+    : props.theme.color.textIcon};
 
   &:hover {
     cursor: pointer;
@@ -24,12 +27,13 @@ const ProfilPict = styled.div`
   margin-left: 13px;
   margin-right: 9px;
   border-radius: 100%;
+  border: 1px solid ${props => props.theme.color.primaryBackground};
   box-sizing: border-box;
 `
 
 const Name = styled.div`
   display: flex;
-  color: #262626;
+  color: ${props => props.theme.color.primaryText};
   flex-direction: row;
   justify-content: space-between;
   font-size: 14px;
@@ -45,30 +49,30 @@ const PersonDetail = styled.div`
 `
 
 const Topic = styled.p`
-  color: #414141;
+  color: ${props => props.theme.color.secondaryText};
   font-size: 13px;
 `
 
 const Time = styled.div`
   font-size: 12px;
-  color: #bfbfbf;
+  color: ${props => props.theme.color.secondaryText};
   align-self: flex-start;
   margin-right: 13px;
   margin-top: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
-  ${props => props.notif ? 'color: #fd8c2e; font-weight: bold' : ''};  
+  ${props => props.notif ? `color: ${props.theme.color.primary}; font-weight: bold` : ''};  
 `
 
 const Message = styled.p`
   font-size: 14px;
-  color: #9d9ea2;
+  color: ${props => props.theme.color.divider};
 `
 
 const NotifMessage = styled.div`
-  background: #fd9b2e;
-  color: #fff;
+  background: ${props => props.theme.color.primary};
+  color: ${props => props.theme.color.textIcon};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,18 +91,20 @@ const Right = styled.div`
 `
 
 export const InboxCard = ({select, name, imgUrl, time, notif, messageCount, topic, lastMessage, handleClick}) => (
-  <Card select={select} onClick={handleClick}>
-    <ProfilPict imgUrl={imgUrl}  />
-    <PersonDetail>
-      <Name>
-        <span>{name}</span>
-      </Name>
-      <Topic>{topic}</Topic>
-      <Message>{lastMessage}</Message>
-    </PersonDetail>
-    <Right>
-      <Time notif={notif}>{time}</Time>
-      {notif && <NotifMessage>{messageCount}</NotifMessage>}
-    </Right>
-  </Card>
+  <ThemeProvider theme={theme}>
+    <Card select={select} onClick={handleClick}>
+      <ProfilPict imgUrl={imgUrl}  />
+      <PersonDetail>
+        <Name>
+          <span>{name}</span>
+        </Name>
+        <Topic>{topic}</Topic>
+        <Message>{lastMessage}</Message>
+      </PersonDetail>
+      <Right>
+        <Time notif={notif}>{time}</Time>
+        {notif && <NotifMessage>{messageCount}</NotifMessage>}
+      </Right>
+    </Card>
+  </ThemeProvider>
 )
