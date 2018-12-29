@@ -50,7 +50,7 @@ export class Inbox extends React.Component {
   
         <SearchBox>
             <SearchIcon src={icSearch} />
-            <SearchInput onChange={(e) => searchInputHandler(e)} value={searchValue} placeholder="Search Proofn" />
+            <SearchInput onChange={(e) => searchInputHandler(e)} value={searchValue} placeholder="Search People" />
           </SearchBox>
   
           {inboxes && inboxes.map(inbox => (

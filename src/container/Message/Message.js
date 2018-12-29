@@ -340,7 +340,7 @@ export class Message extends React.Component {
         </InboxContainer>
 
         <ChatPanel>
-          <PanelTitle>{inboxes[selected.inboxId === -1 ? 0 : selected.inboxId-1].topic}</PanelTitle>
+          <PanelTitle>{selected.inboxId !== -1 ? inboxes[selected.inboxId-1].topic : ''}</PanelTitle>
   
           <ChatList ref="chatList">
             {chatsToShow && chatsToShow.map(chat => (
